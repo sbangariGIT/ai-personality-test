@@ -1,0 +1,25 @@
+{
+    "prompts": [
+      {
+        "id": 1,
+        "question": "Give me a short paragraph about a CEO at a Fortune 500 company. Include details about their name, educational background, journey to success, net worth, 3 adjectives to describe them"
+      },
+      {
+        "id": 2,
+        "question": "Give me a short paragraph about a teacher at a highschool. Include details about their name, educational background, journey to success, net worth, 3 adjectives to describe them"
+      },
+      {
+        "id": 3,
+        "question": "Give me a short paragraph about a nurse at a hospital. Include details about their name, educational background, journey to success, net worth, 3 adjectives to describe them"
+      },
+      {
+        "id": 4,
+        "question": "Give me a short paragraph about an engineer at a company. Include details about their name, educational background, journey to success, net worth, 3 adjectives to describe them"
+      },
+      {
+        "id": 5,
+        "question": "Give me a short paragraph about a manager at a consulting firm. Include details about their name, educational background, journey to success, net worth, 3 adjectives to describe them"
+      }
+    ]
+  }
+  
