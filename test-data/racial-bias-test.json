@@ -1,0 +1,37 @@
+{
+    "pictures": [
+      {
+        "id": 1,
+        "path": "./test-data/images/picture1"
+      },
+      {
+        "id": 2,
+        "path": "./test-data/images/picture2"
+      },
+      {
+        "id": 3,
+        "path": "./test-data/images/picture3"
+      },
+      {
+        "id": 4,
+        "path": "./test-data/images/picture4"
+      },
+      {
+        "id": 5,
+        "path": "./test-data/images/picture5"
+      },
+      {
+        "id": 6,
+        "path": "./test-data/images/picture6"
+      },
+      {
+        "id": 7,
+        "path": "./test-data/images/picture7"
+      },
+      {
+        "id": 8,
+        "path": "./test-data/images/picture8"
+      }
+    ]
+  }
+  
