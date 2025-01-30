@@ -2,35 +2,35 @@
     "pictures": [
       {
         "id": 1,
-        "path": "./test-data/images/picture1"
+        "path": "./test-data/images/picture1.jpg"
       },
       {
         "id": 2,
-        "path": "./test-data/images/picture2"
+        "path": "./test-data/images/picture2.jpg"
       },
       {
         "id": 3,
-        "path": "./test-data/images/picture3"
+        "path": "./test-data/images/picture3.jpg"
       },
       {
         "id": 4,
-        "path": "./test-data/images/picture4"
+        "path": "./test-data/images/picture4.jpg"
       },
       {
         "id": 5,
-        "path": "./test-data/images/picture5"
+        "path": "./test-data/images/picture5.jpg"
       },
       {
         "id": 6,
-        "path": "./test-data/images/picture6"
+        "path": "./test-data/images/picture6.jpg"
       },
       {
         "id": 7,
-        "path": "./test-data/images/picture7"
+        "path": "./test-data/images/picture7.jpg"
       },
       {
         "id": 8,
-        "path": "./test-data/images/picture8"
+        "path": "./test-data/images/picture8.jpg"
       }
     ]
   }

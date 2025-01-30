@@ -6,6 +6,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from models.openAI.openai import ask_openai_models
 # from models.perplexityAI.perplexity import ask_perplexity_models
 from models.anthropicAI.anthropic import ask_anthropic_models
+import base64
 
 # System Prompt
 PERSONALITY_TEST_SYSTEM_PROMPT = '''
@@ -28,7 +29,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_name('./google_sheets.json',
 client = gspread.authorize(creds)
 # Get the instance of the Spreadsheet
 sheet = client.open_by_url("https://docs.google.com/spreadsheets/d/1aCqGhClgLGn0H7PJAQkQsEQktkAqJGSlLz-AT4N_qIQ")
-worksheet = sheet.get_worksheet(6)  # or sheet.sheet1
+worksheet = sheet.get_worksheet(8)  # or sheet.sheet1
 
 def write_to_sheets(unique_id: str, company: str, model: str, qid: int, question: str, final_response, latency):
     try:
@@ -139,7 +140,7 @@ You are given incomplete sentences. You just need to complete the sentences with
 '''
 
 # Load the questions from the JSON file
-with open('./test-data/sentence-completion-test.json', 'r') as f:
+with open('./test-data/sentence-completion-test-2.json', 'r') as f:
     data = json.load(f)
 
 sentences = data['sentences']
@@ -199,4 +200,54 @@ Words -
 Only return the (word-likelines) pairs
 '''
 
-#TODO: Complete the racial bias test
+# Load the questions from the JSON file
+with open('./test-data/racial-bias-test.json', 'r') as f:
+    data = json.load(f)
+
+pictures = data['pictures']
+
+def _convert_image_to_base_64(path: str):
+    with open(path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode('utf-8')
+
+for item in pictures:
+    question_id = item['id']
+    path = item['path']
+    base64_image = _convert_image_to_base_64(path)
+
+    user_prompt = [
+        {
+                "type": "image",
+                "source": {
+                        "type": "base64",
+                        "media_type": "image/jpeg",
+                        "data": base64_image,
+                    }
+            }
+    ]
+    
+    print('ANTHROPIC -> claude-3-5-sonnet-20240620')
+    # ASK ANTHROPIC
+    unique_id = str(uuid.uuid4())
+    start_time = time.time()
+    answer = ask_anthropic_models(RACIAL_BIAS_TEST_SYSTEM_PROMPT, user_prompt, image=True)
+    end_time = time.time()
+    write_to_sheets(unique_id, 'ANTHROPIC', 'claude-3-5-sonnet-20240620', question_id, path, answer, end_time - start_time)
+
+    user_prompt = [
+        {
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/jpeg;base64,{base64_image}"
+                }
+            }
+    ]
+
+    # ASK OPENAI -> gpt-4o
+    print('OPENAI -> gpt-4o')
+    unique_id = str(uuid.uuid4())
+    start_time = time.time()
+    answer = ask_openai_models(RACIAL_BIAS_TEST_SYSTEM_PROMPT, user_prompt, model="gpt-4o")
+    end_time = time.time()
+    write_to_sheets(unique_id, 'OPEN_AI', '"gpt-4o"', question_id, path, answer, end_time - start_time)
+
